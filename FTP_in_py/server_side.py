@@ -1,7 +1,7 @@
 import socket
 import os
 
-
+#I'm Bored
 users_num = 1
 users_dict = {}
 while True:
@@ -23,14 +23,12 @@ while True:
             path1 = path + rf"\{user}"
             client_socket.send("You're Signed in! \nWhats Your First Request --> ".encode())
     if not user_assigned:
-        i = 0
-        client_socket.send("Confirm Your Password --> ".encode())
-        password_again = client_socket.recv(1024).decode()
-        while i < 2 and password_again != password:
+        for i in range(3):
             client_socket.send("Confirm Your Password --> ".encode())
             password_again = client_socket.recv(1024).decode()
-            i += 1
-        if i == 2 and password_again != password:
+            if password_again == password:
+                break
+        if password_again != password:
             client_socket.send("Confirmation Of Password Not Good: GoodBye".encode())
             client_socket.close()
         user_assigned = True
